@@ -1,0 +1,22 @@
+%h1 Minesweeper
+-if board.lost
+  .alert.alert-danger
+    <b>You lost!</b> Click the button below to start a new game.
+%table#board.table-bordered
+  -board.columns.times do |column|
+    %tr
+      -board.rows.times do |row|
+        -board.get_tile(row, column).tap do |tile|
+          %td
+            -if !tile.revealed
+              =link_to '', reveal_game_path(row: row, column: column), method: :patch
+            -else
+              .revealed
+                -if tile.mine
+                  .mine M!
+                -else
+                  =tile.neighbor_mines_count > 0 ? tile.neighbor_mines_count : ''
+
+
+%p <b>#{board.moves_count}</b> moves
+%p=link_to 'Reset', reset_game_path, method: :post, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to reset the current game?' }

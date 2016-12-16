@@ -1,0 +1,28 @@
+$cell-size: 40px;
+
+#board {
+  margin-bottom: 1em;
+  td {
+    width: $cell-size;
+    background-color: #c1c1c1;
+    & > * {
+      width: 100%;
+      display: block;
+      height: $cell-size;
+      line-height: $cell-size;
+      vertical-align: middle;
+      text-align: center;
+    }
+    a {
+      text-decoration: none !important;
+      border: 3px #c1c1c1 outset;
+    }
+    .revealed {
+      font-weight: bold;
+      color: green;
+      .mine {
+        color: red;
+      }
+    }
+  }
+}
